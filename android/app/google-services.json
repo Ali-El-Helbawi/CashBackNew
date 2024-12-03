@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "465805704077",
+    "firebase_url": "https://a2b-wallet.firebaseio.com",
+    "project_id": "a2b-wallet",
+    "storage_bucket": "a2b-wallet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:465805704077:android:697a590d36b957945cdbc4",
+        "android_client_info": {
+          "package_name": "com.bts.a2b"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "465805704077-1kbsfamufoorkeb9qcscj5r35obe9u05.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCKxlJSzTQwCZBWCymeIzOlhkhkOlKxL-s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "465805704077-1kbsfamufoorkeb9qcscj5r35obe9u05.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "465805704077-mkgns2thad6i2dpfshq7o0l6n2ppv61i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bts.a2b"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

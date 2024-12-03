@@ -1,0 +1,135 @@
+# Resolve react_native_pods.rb with node to allow for hoisting
+require Pod::Executable.execute_command('node', ['-p',
+  'require.resolve(
+    "react-native/scripts/react_native_pods.rb",
+    {paths: [process.argv[1]]},
+  )', __dir__]).strip
+
+platform :ios, min_ios_version_supported
+#platform :ios, '13.0'
+prepare_react_native_project!
+use_frameworks! :linkage => :static
+# right after `use_frameworks! :linkage => :static`
+$RNFirebaseAsStaticFramework = true
+#use_frameworks!
+#$RNFirebaseAsStaticFramework = true
+# If you are using a `react-native-flipper` your iOS build will fail when `NO_FLIPPER=1` is set.
+# because `react-native-flipper` depends on (FlipperKit,...) that will be excluded
+#
+# To fix this you can also exclude `react-native-flipper` using a `react-native.config.js`
+# ```js
+# module.exports = {
+#   dependencies: {
+#     ...(process.env.NO_FLIPPER ? { 'react-native-flipper': { platforms: { ios: null } } } : {}),
+# ```
+#flipper_config = ENV['NO_FLIPPER'] == "1" ? FlipperConfiguration.disabled : FlipperConfiguration.enabled
+flipper_config = FlipperConfiguration.disabled
+linkage = ENV['USE_FRAMEWORKS']
+if linkage != nil
+  Pod::UI.puts "Configuring Pod with #{linkage}ally linked Frameworks".green
+  use_frameworks! :linkage => linkage.to_sym
+end
+
+target 'CashBack' do
+  $static_framework = []
+  config = use_native_modules!
+
+
+  use_react_native!(
+    :path => config[:reactNativePath],
+    # Enables Flipper.
+    #
+    # Note that if you have use_frameworks! enabled, Flipper will not work and
+    # you should disable the next line.
+    :flipper_configuration => flipper_config,
+    # An absolute path to your application root.
+    :app_path => "#{Pod::Config.instance.installation_root}/.."
+  )
+  $static_framework += [
+     'react-native-maps',
+     'react-native-google-maps',
+     'Google-Maps-iOS-Utils',
+     'GoogleMaps',
+     'RNPermissions',
+     'Permission-LocationWhenInUse',
+     'Permission-Notifications',
+     'react-native-paste-input',
+     'vision-camera-code-scanner',
+     'VisionCamera'
+   ]
+ 
+  pod 'GoogleMaps'
+  pod 'Google-Maps-iOS-Utils'
+  rn_maps_path = '../node_modules/react-native-maps'
+  pod 'react-native-google-maps', :path => rn_maps_path
+  permissions_path = '../node_modules/react-native-permissions/ios'
+  pod 'Permission-Notifications', :path => "#{permissions_path}/Notifications"
+  
+  permissions_path = '../node_modules/react-native-permissions/ios'
+  
+  pod 'Permission-Camera', :path => "#{permissions_path}/Camera"
+  
+  pod 'Firebase', :modular_headers => true
+  pod 'FirebaseCore', :modular_headers => true
+  pod 'GoogleUtilities', :modular_headers => true
+  pod 'RNFBApp', :path => '../node_modules/@react-native-firebase/app'
+  pod 'TouchID', :path => "../node_modules/react-native-touch-id"
+  
+  # pod 'Google-Maps-iOS-Utils', :git => 'https://github.com/Simon-TechForm/google-maps-ios-utils.git', :branch => 'feat/support-apple-silicon'
+
+  
+  
+  target 'CashBackTests' do
+    inherit! :complete
+    # Pods for testing
+  end
+
+
+  # # ****** THIS IS THE MAGIC ******
+  # pre_install do |installer|
+  #   Pod::Installer::Xcode::TargetValidator.send(:define_method, :verify_no_static_framework_transitive_dependencies) {}
+  #         installer.pod_targets.each do |pod|
+  #             if $static_framework.include?(pod.name)
+  #                 def pod.build_type;
+  #                 Pod::BuildType.static_library # >= 1.9
+  #             end
+  #           end
+  #         end
+  # end
+
+
+
+
+  post_install do |installer|
+    # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
+
+    react_native_post_install(
+      installer,
+      config[:reactNativePath],
+      :mac_catalyst_enabled => false
+    )
+
+
+    # installer.pods_project.targets.each do |target|
+    #   if target.name == 'RCT-Folly'
+    #     target.build_configurations.each do |config|
+    #       config.build_settings['HEADER_SEARCH_PATHS'] = "$(inherited) ${PODS_ROOT}/fmt/include"
+    #      end
+    #   end
+    # end
+
+    #   #   __apply_Xcode_12_5_M1_post_install_workaround(installer)
+    # installer.pods_project.build_configurations.each do |config|
+    #   config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+    # end
+
+  end
+
+  
+
+
+
+end
+
+
+ 
