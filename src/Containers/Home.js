@@ -571,15 +571,20 @@ const Home = props => {
               }
             />
             <View style={{height: 10}}></View>
-            <View style={{marginHorizontal: 30}}>
-              <Text style={{color: Orange}}>{Translate('Top Deals')}</Text>
-            </View>
+
             <View style={{height: 10}}></View>
             <DealsFlatList
               data={MokeHomeDeals1}
               navigation={props.navigation}
               setSubPage={setSubPage}
               setShowHeader={setShowHeader}
+              title1={Translate('Top Deals')}
+              title2={Translate('ViewAll')}
+              //  title2Style={{color: BlueColor}}
+              titleViewStyle={{paddingBottom: 10}}
+              title2OnPress={() => {
+                props.navigation.jumpTo('Deals', {});
+              }}
             />
             <View style={{height: 30}}></View>
             <DealsFlatList
@@ -587,6 +592,7 @@ const Home = props => {
               navigation={props.navigation}
               setSubPage={setSubPage}
               setShowHeader={setShowHeader}
+              titleViewStyle={{height: 0}}
             />
             <View style={{height: 30}}></View>
           </ImageBackground>

@@ -2,10 +2,29 @@ import React from 'react';
 import {Alert, Pressable, useWindowDimensions, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {FlatList} from 'react-native-gesture-handler';
-import {DefaultBackgroundColor, Orange, White} from '../assets/colors';
+import {
+  BlueColor,
+  DefaultBackgroundColor,
+  Orange,
+  White,
+} from '../assets/colors';
 import {handleDealPress} from '../Helpers/functions';
+import {Text} from 'react-native-paper';
+import {Font, Translate} from '../Helpers';
 
-const DealsFlatList = ({data = [], navigation, setSubPage, setShowHeader}) => {
+const DealsFlatList = ({
+  data = [],
+  navigation,
+  setSubPage,
+  setShowHeader,
+  title1 = '',
+  title2 = '',
+  titleViewStyle = {},
+  title1Style = {},
+  title2Style = {},
+  title1OnPress = () => {},
+  title2OnPress = () => {},
+}) => {
   const {width} = useWindowDimensions();
   const _width = (width - 60) / 2.8;
   const height = _width * 0.65;
@@ -13,6 +32,47 @@ const DealsFlatList = ({data = [], navigation, setSubPage, setShowHeader}) => {
   return (
     <View style={{backgroundColor: White, paddingVertical: 0}}>
       {/* <View style={{height: 10, width: width}}></View> */}
+      <View
+        style={[
+          {
+            paddingHorizontal: 30,
+            backgroundColor: DefaultBackgroundColor,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          },
+          titleViewStyle,
+        ]}>
+        <Text
+          onPress={() => {
+            title1OnPress();
+          }}
+          style={[
+            {
+              color: BlueColor,
+              fontFamily: Font,
+              fontWeight: '300',
+              fontSize: 15,
+            },
+            title1Style,
+          ]}>
+          {title1}
+        </Text>
+        <Text
+          onPress={() => {
+            title2OnPress();
+          }}
+          style={[
+            {
+              color: Orange,
+              fontFamily: Font,
+              fontWeight: '900',
+              fontSize: 15,
+            },
+            title2Style,
+          ]}>
+          {title2}
+        </Text>
+      </View>
       <FlatList
         data={data}
         horizontal

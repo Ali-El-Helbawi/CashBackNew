@@ -163,7 +163,8 @@ function AppStack() {
         }}
       />
       <AppTab.Screen
-        name={Translate('Deals')}
+        name={'Deals'}
+        //name={Translate('Deals')}
         component={DealStack}
         options={{
           tabBarIcon: ({color}) => (

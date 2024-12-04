@@ -33,7 +33,11 @@ import {
 } from '../assets/colors';
 import FastImage from 'react-native-fast-image';
 import DealsFlatList from '../Components/DealsFlatList';
-import {MokeHomeDeals1, MokeHomeDeals2} from '../Helpers/mockData';
+import {
+  MokeHomeDeals1,
+  MokeHomeDeals2,
+  MokeHomeDeals3,
+} from '../Helpers/mockData';
 import {useNavigation} from '@react-navigation/native';
 const Container = styled.View`
   background-color: #;
@@ -152,15 +156,24 @@ const Deals = props => {
               navigation={navigation}
               setSubPage={setSubPage}
               setShowHeader={setShowHeader}
+              title1={Translate('Internet')}
             />
-            {/* <View style={{height: 10}}></View> */}
+
+            <View style={{height: 10}}></View>
+            <DealsFlatList
+              data={MokeHomeDeals3}
+              navigation={navigation}
+              setSubPage={setSubPage}
+              setShowHeader={setShowHeader}
+              title1={Translate('Tourism')}
+            />
             <View style={{alignContent: 'center', alignItems: 'center'}}>
               <FastImage
                 source={require('../../assets/ads.jpg')}
                 resizeMode={FastImage.resizeMode.cover}
                 style={{
                   width: width - 0,
-                  height: width / 3,
+                  height: width / 3.5,
                   marginVertical: 10,
                 }}
               />
@@ -170,8 +183,9 @@ const Deals = props => {
               navigation={navigation}
               setSubPage={setSubPage}
               setShowHeader={setShowHeader}
+              title1={Translate('Education')}
             />
-            <View style={{alignContent: 'center', alignItems: 'center'}}>
+            {/* <View style={{alignContent: 'center', alignItems: 'center'}}>
               <FastImage
                 source={require('../../assets/ads.jpg')}
                 resizeMode={FastImage.resizeMode.cover}
@@ -181,7 +195,7 @@ const Deals = props => {
                   marginVertical: 10,
                 }}
               />
-            </View>
+            </View> */}
             <View style={{height: 30}}></View>
           </ImageBackground>
         </ScrollView>

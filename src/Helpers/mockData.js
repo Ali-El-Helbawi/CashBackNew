@@ -127,6 +127,29 @@ export const MokeHomeDeals2 = [
     link: 'https://www.ul.edu.lb/',
   },
 ];
+export const MokeHomeDeals3 = [
+  {
+    image: require('../../assets/Ads/Hala_Tour.jpg'),
+    name: 'Hala Tour',
+    link: `https://www.facebook.com/HalaTravelandTourism`,
+  },
+  {
+    image: require('../../assets/Ads/Five_Stars_Tours.png'),
+    name: 'Five Stars Tours',
+    link: 'https://www.fivestarstours.com/',
+  },
+  {
+    image: require('../../assets/Ads/Nakhal_Tour.jpg'),
+    name: 'Nakhal Tour',
+    link: 'https://www.nakhal.com/',
+  },
+  {
+    image: require('../../assets/Ads/Touch_Travel_Tour.jpg'),
+    name: 'Touch Travel Tour',
+    link: 'https://touch-travel.com/',
+  },
+];
+
 export const _UserObj = {
   user: {
     ErrorMessage: '',

@@ -279,6 +279,10 @@ function Translate(word, lang) {
       'Please verify provider and the amount': 'يرجى التحقق من مزود والمبلغ',
       'Go to website': 'الذهاب الي الموقع',
       Services: 'خدمات',
+      Internet: 'إنترنت',
+      Tourism: 'سياحة',
+      Education: 'تعليم',
+      ViewAll: 'عرض الكل',
     },
 
     en: {
@@ -373,6 +377,10 @@ function Translate(word, lang) {
       LTT_ADSL: 'LTT ADSL',
       Connect: 'Connect',
       Services: 'Services',
+      Internet: 'Internet',
+      Tourism: 'Tourism',
+      Education: 'Education',
+      ViewAll: 'View All',
     },
   };
   if (dictionary[language][word]) {
